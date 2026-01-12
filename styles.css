@@ -1,0 +1,407 @@
+/* RESP Portfolio Tracker - Styles */
+
+:root {
+    --primary-color: #3b82f6;
+    --positive-color: #22c55e;
+    --negative-color: #ef4444;
+    --background: #0f172a;
+    --card-background: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+}
+
+[data-theme="light"] {
+    --primary-color: #2563eb;
+    --positive-color: #16a34a;
+    --negative-color: #dc2626;
+    --background: #f8fafc;
+    --card-background: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+/* Header */
+.header {
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
+    border-radius: 12px;
+    color: white;
+    box-shadow: var(--shadow-lg);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+.last-updated {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    text-align: center;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Summary Cards */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.card-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.card-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.card-sublabel {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.spinner {
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error {
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    color: #991b1b;
+}
+
+/* Holdings Section */
+.holdings-section {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.holdings-section h2 {
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.holdings-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.holdings-table thead {
+    background: var(--background);
+}
+
+.holdings-table th {
+    padding: 12px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.holdings-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.holdings-table tbody tr:hover {
+    background: var(--background);
+}
+
+.holdings-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.holdings-table small {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Sticky Column */
+.sticky-col {
+    position: sticky;
+    left: 0;
+    background: var(--card-background);
+    z-index: 10;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.holdings-table thead .sticky-col {
+    background: var(--background);
+}
+
+.holdings-table tbody tr:hover .sticky-col {
+    background: var(--background);
+}
+
+/* Positive/Negative Values */
+.positive {
+    color: var(--positive-color);
+}
+
+.negative {
+    color: var(--negative-color);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding: 40px 20px 20px;
+}
+
+.footer p {
+    margin-bottom: 8px;
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 8px;
+    }
+
+    .header {
+        padding: 12px 15px;
+        margin-bottom: 15px;
+    }
+
+    .header h1 {
+        font-size: 1.1rem;
+    }
+
+    .subtitle {
+        font-size: 0.75rem;
+    }
+
+    .last-updated {
+        font-size: 0.7rem;
+    }
+
+    .theme-toggle {
+        padding: 6px 10px;
+        font-size: 1rem;
+    }
+
+    .summary-cards {
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .card {
+        padding: 10px 12px;
+    }
+
+    .card-label {
+        font-size: 0.7rem;
+        margin-bottom: 3px;
+    }
+
+    .card-value {
+        font-size: 1.15rem;
+        margin-bottom: 2px;
+    }
+
+    .card-sublabel {
+        font-size: 0.8rem;
+    }
+
+    .holdings-section {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .holdings-section h2 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .holdings-table {
+        font-size: 0.85rem;
+    }
+
+    .holdings-table th,
+    .holdings-table td {
+        padding: 10px 8px;
+    }
+
+    /* Hide Avg Cost column on mobile to save space */
+    .holdings-table th:nth-child(4),
+    .holdings-table td:nth-child(4) {
+        display: none;
+    }
+
+    /* Ensure sticky column has min-width on mobile */
+    .sticky-col {
+        min-width: 60px;
+    }
+
+    .footer {
+        font-size: 0.8rem;
+        padding: 30px 15px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 6px;
+    }
+
+    .header {
+        padding: 10px 12px;
+    }
+
+    .header h1 {
+        font-size: 1rem;
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .card {
+        padding: 8px 10px;
+    }
+
+    .card-label {
+        font-size: 0.65rem;
+    }
+
+    .card-value {
+        font-size: 1rem;
+    }
+
+    .card-sublabel {
+        font-size: 0.75rem;
+    }
+
+    .holdings-section {
+        padding: 10px;
+    }
+
+    /* Hide Name column on very small screens - ticker sticky column is enough */
+    .holdings-table th:nth-child(2),
+    .holdings-table td:nth-child(2) {
+        display: none;
+    }
+
+    /* Make table font smaller on tiny screens */
+    .holdings-table {
+        font-size: 0.75rem;
+    }
+
+    .footer {
+        font-size: 0.75rem;
+        padding: 25px 10px 10px;
+    }
+}

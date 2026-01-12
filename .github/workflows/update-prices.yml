@@ -1,0 +1,42 @@
+name: Update Portfolio Prices
+
+on:
+  # Run during market hours (EST) on weekdays only
+  schedule:
+    - cron: '0 15 * * 1-5'   # 10:00 AM EST, Monday-Friday
+    - cron: '0 19 * * 1-5'   # 2:00 PM EST, Monday-Friday
+    - cron: '30 21 * * 1-5'  # 4:30 PM EST, Monday-Friday (after market close)
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Required to commit changes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install yfinance
+
+      - name: Update prices
+        run: |
+          python update_prices.py
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add portfolio.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update prices - $(date -u +'%Y-%m-%d %H:%M:%S UTC')" && git push)

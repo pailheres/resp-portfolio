@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESP Portfolio Tracker</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div>
+                    <h1>📈 RESP Portfolio</h1>
+                    <p class="subtitle">Education Savings Tracker</p>
+                </div>
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+            <div class="last-updated" id="lastUpdated">Loading...</div>
+        </header>
+
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-label">Total Value</div>
+                <div class="card-value" id="totalValue">$--</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Total Gain/Loss</div>
+                <div class="card-value" id="totalGain">$--</div>
+                <div class="card-sublabel" id="totalGainPercent">--%</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Cash Balance</div>
+                <div class="card-value" id="cashBalance">$--</div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Fetching live prices...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error" class="error" style="display: none;">
+            <p>⚠️ Unable to load portfolio data. Please try again later.</p>
+        </div>
+
+        <!-- Holdings Table -->
+        <div class="holdings-section">
+            <h2>Current Holdings</h2>
+            <div class="table-container">
+                <table class="holdings-table" id="holdingsTable">
+                    <thead>
+                        <tr>
+                            <th class="sticky-col">Ticker</th>
+                            <th>Name</th>
+                            <th class="text-right">Shares</th>
+                            <th class="text-right">Avg Cost</th>
+                            <th class="text-right">Current Price</th>
+                            <th class="text-right">Market Value</th>
+                            <th class="text-right">Gain/Loss</th>
+                            <th class="text-right">Return %</th>
+                            <th class="text-right">Today</th>
+                        </tr>
+                    </thead>
+                    <tbody id="holdingsBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Prices are delayed ~15 minutes. Data from Yahoo Finance.</p>
+            <p>🚀 RESP Portfolio Tracker</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

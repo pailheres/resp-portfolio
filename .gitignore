@@ -1,0 +1,32 @@
+# Keep private - NEVER commit these files
+MULTI_*.csv
+*.csv
+credentials.json
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Public files - COMMIT these
+# portfolio.json
+# index.html
+# app.js
+# styles.css
+# README.md
