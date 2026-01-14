@@ -6,6 +6,7 @@ Fetches live prices and updates portfolio.json
 import json
 import yfinance as yf
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 def fetch_stock_data(symbol):
     """Fetch current price and changes from Yahoo Finance"""
@@ -59,8 +60,8 @@ def update_portfolio():
         else:
             print("FAILED")
 
-    # Update timestamp
-    portfolio['lastUpdated'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    # Update timestamp (Eastern Time with automatic DST handling)
+    portfolio['lastUpdated'] = datetime.now(ZoneInfo('America/New_York')).strftime('%Y-%m-%d %H:%M:%S %Z')
 
     # Calculate totals
     total_cost = sum(h.get('costBasis', 0) for h in portfolio['holdings'])
