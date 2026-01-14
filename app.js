@@ -80,6 +80,9 @@ function renderHoldings(holdings) {
         const gainLossClass = hasPrice && holding.gainLoss >= 0 ? 'positive' : 'negative';
         const todayClass = hasPrice && holding.change >= 0 ? 'positive' : 'negative';
 
+        // Calculate total change in dollars (change per share * number of shares)
+        const totalChange = hasPrice ? holding.change * holding.shares : null;
+
         const row = tbody.insertRow();
         row.innerHTML = `
             <td class="sticky-col"><strong>${holding.brokerSymbol}</strong></td>
@@ -91,7 +94,7 @@ function renderHoldings(holdings) {
             <td class="text-right ${gainLossClass}"><strong>${hasPrice ? formatCurrency(holding.gainLoss) : '--'}</strong></td>
             <td class="text-right ${gainLossClass}"><strong>${hasPrice ? formatPercent(holding.gainLossPercent) : '--'}</strong></td>
             <td class="text-right ${todayClass}">
-                ${hasPrice ? formatCurrency(holding.change) : '--'}<br>
+                ${hasPrice ? formatCurrency(totalChange) : '--'}<br>
                 <small>${hasPrice ? formatPercent(holding.changePercent) : '--'}</small>
             </td>
         `;
