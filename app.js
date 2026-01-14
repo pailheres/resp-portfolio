@@ -29,7 +29,8 @@ initTheme();
 // Fetch portfolio data from JSON file (includes prices)
 async function loadPortfolio() {
     try {
-        const response = await fetch('portfolio.json');
+        // Add timestamp to bypass browser cache
+        const response = await fetch(`portfolio.json?v=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to load portfolio');
         portfolioData = await response.json();
         return portfolioData;
