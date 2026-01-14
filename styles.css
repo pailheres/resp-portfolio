@@ -135,27 +135,6 @@ body {
     font-weight: 600;
 }
 
-.card-today-label {
-    font-size: 0.65rem;
-    color: var(--text-secondary);
-    margin-top: 8px;
-    margin-bottom: 2px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.card-today-value {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 1px;
-}
-
-.card-today-percent {
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
 /* Loading State */
 .loading {
     text-align: center;

@@ -145,8 +145,8 @@ function updateSummary() {
 
     // Apply color classes for today's change
     const todayClass = todayTotalChange >= 0 ? 'positive' : 'negative';
-    todayGainElement.className = `card-today-value ${todayClass}`;
-    todayGainPercentElement.className = `card-today-percent ${todayClass}`;
+    todayGainElement.className = `card-value ${todayClass}`;
+    todayGainPercentElement.className = `card-sublabel ${todayClass}`;
 }
 
 // Update last updated timestamp
