@@ -124,6 +124,29 @@ function updateSummary() {
     const gainClass = totalGain >= 0 ? 'positive' : 'negative';
     gainElement.className = `card-value ${gainClass}`;
     gainPercentElement.className = `card-sublabel ${gainClass}`;
+
+    // Calculate today's total change
+    let todayTotalChange = 0;
+    portfolioData.holdings.forEach(holding => {
+        if (holding.change !== null && holding.change !== undefined) {
+            todayTotalChange += holding.change * holding.shares;
+        }
+    });
+
+    // Calculate today's percentage (change vs yesterday's value)
+    const yesterdayValue = totalMarketValue - todayTotalChange;
+    const todayPercent = yesterdayValue !== 0 ? (todayTotalChange / yesterdayValue) * 100 : 0;
+
+    const todayGainElement = document.getElementById('todayGain');
+    const todayGainPercentElement = document.getElementById('todayGainPercent');
+
+    todayGainElement.textContent = formatCurrency(todayTotalChange);
+    todayGainPercentElement.textContent = formatPercent(todayPercent);
+
+    // Apply color classes for today's change
+    const todayClass = todayTotalChange >= 0 ? 'positive' : 'negative';
+    todayGainElement.className = `card-today-value ${todayClass}`;
+    todayGainPercentElement.className = `card-today-percent ${todayClass}`;
 }
 
 // Update last updated timestamp
