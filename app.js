@@ -2,6 +2,8 @@
 // Reads pre-fetched prices from portfolio.json (updated by GitHub Actions)
 
 let portfolioData = null;
+let currentAccountView = 'all'; // 'all' or account name
+let isMultiAccount = false;
 
 // Theme Management
 function initTheme() {
@@ -33,6 +35,10 @@ async function loadPortfolio() {
         const response = await fetch(`portfolio.json?v=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to load portfolio');
         portfolioData = await response.json();
+
+        // Detect if multi-account format
+        isMultiAccount = portfolioData.accounts !== undefined;
+
         return portfolioData;
     } catch (error) {
         console.error('Error loading portfolio:', error);
@@ -102,10 +108,48 @@ function renderHoldings(holdings) {
     });
 }
 
+// Get current view data (account or all)
+function getCurrentViewData() {
+    if (!isMultiAccount) {
+        return {
+            holdings: portfolioData.holdings || [],
+            summary: portfolioData.summary || {},
+            cash: portfolioData.cash || 0
+        };
+    }
+
+    if (currentAccountView === 'all') {
+        // Combine all accounts
+        let allHoldings = [];
+        portfolioData.accounts.forEach(account => {
+            allHoldings = allHoldings.concat(account.holdings);
+        });
+
+        return {
+            holdings: allHoldings,
+            summary: portfolioData.totalSummary || {},
+            cash: portfolioData.totalSummary.totalCash || 0
+        };
+    } else {
+        // Find specific account
+        const account = portfolioData.accounts.find(a => a.name === currentAccountView);
+        if (account) {
+            return {
+                holdings: account.holdings || [],
+                summary: account.summary || {},
+                cash: account.cash || 0
+            };
+        }
+    }
+
+    return { holdings: [], summary: {}, cash: 0 };
+}
+
 // Update summary cards
 function updateSummary() {
-    const summary = portfolioData.summary || {};
-    const cash = portfolioData.cash || 0;
+    const viewData = getCurrentViewData();
+    const summary = viewData.summary;
+    const cash = viewData.cash;
     const totalMarketValue = summary.totalMarketValue || 0;
     const totalValue = totalMarketValue + cash;
     const totalGain = summary.totalGainLoss || 0;
@@ -127,7 +171,7 @@ function updateSummary() {
 
     // Calculate today's total change
     let todayTotalChange = 0;
-    portfolioData.holdings.forEach(holding => {
+    viewData.holdings.forEach(holding => {
         if (holding.change !== null && holding.change !== undefined) {
             todayTotalChange += holding.change * holding.shares;
         }
@@ -157,6 +201,44 @@ function updateLastUpdated() {
     }
 }
 
+// Render account tabs for multi-account view
+function renderAccountTabs() {
+    if (!isMultiAccount) {
+        document.getElementById('accountTabs').style.display = 'none';
+        return;
+    }
+
+    const tabsContainer = document.getElementById('accountTabs');
+    tabsContainer.style.display = 'flex';
+    tabsContainer.innerHTML = '';
+
+    // Add "All Accounts" tab
+    const allTab = document.createElement('button');
+    allTab.className = 'account-tab' + (currentAccountView === 'all' ? ' active' : '');
+    allTab.textContent = 'All Accounts';
+    allTab.onclick = () => switchAccount('all');
+    tabsContainer.appendChild(allTab);
+
+    // Add individual account tabs
+    portfolioData.accounts.forEach(account => {
+        const tab = document.createElement('button');
+        tab.className = 'account-tab' + (currentAccountView === account.name ? ' active' : '');
+        tab.textContent = account.name;
+        tab.onclick = () => switchAccount(account.name);
+        tabsContainer.appendChild(tab);
+    });
+}
+
+// Switch account view
+function switchAccount(accountName) {
+    currentAccountView = accountName;
+    renderAccountTabs();
+
+    const viewData = getCurrentViewData();
+    renderHoldings(viewData.holdings);
+    updateSummary();
+}
+
 // Show error state
 function showError() {
     document.getElementById('loading').style.display = 'none';
@@ -173,8 +255,14 @@ async function initApp() {
         // Hide loading, show data
         document.getElementById('loading').style.display = 'none';
 
+        // Render account tabs (if multi-account)
+        renderAccountTabs();
+
+        // Get current view data
+        const viewData = getCurrentViewData();
+
         // Render holdings
-        renderHoldings(portfolioData.holdings);
+        renderHoldings(viewData.holdings);
 
         // Update summary
         updateSummary();
