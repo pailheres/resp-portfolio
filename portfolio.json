@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27 20:19:13 EST",
+  "lastUpdated": "2026-01-27 20:26:21 EST",
   "accounts": [
     {
       "name": "Main",
@@ -34,7 +34,7 @@
           "avgCost": 16.93
         },
         {
-          "symbol": "GIGA.TO",
+          "symbol": "GIGA.V",
           "brokerSymbol": "GIGA",
           "displayName": "GIGA METALS CORP",
           "shares": 2000.0,
@@ -69,7 +69,7 @@
           "avgCost": 39.83
         },
         {
-          "symbol": "SURG.TO",
+          "symbol": "SURG.V",
           "brokerSymbol": "SURG",
           "displayName": "SURGE COPPER CORP",
           "shares": 500.0,
