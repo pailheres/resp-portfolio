@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27 20:27:24 EST",
+  "lastUpdated": "2026-01-27 20:36:46 EST",
   "accounts": [
     {
       "name": "Main",
@@ -38,7 +38,7 @@
           "brokerSymbol": "GIGA",
           "displayName": "GIGA METALS CORP",
           "shares": 2000.0,
-          "avgCost": 0.14
+          "avgCost": 0.135
         },
         {
           "symbol": "GOOG.TO",
@@ -87,14 +87,14 @@
           "brokerSymbol": "TPE",
           "displayName": "TD INTL EQTY INDX     ETF",
           "shares": 50.0,
-          "avgCost": 24.29
+          "avgCost": 24.286
         },
         {
           "symbol": "TPU.TO",
           "brokerSymbol": "TPU",
           "displayName": "TD US EQUITY INDEX ETF",
           "shares": 60.0,
-          "avgCost": 45.6
+          "avgCost": 45.6033
         },
         {
           "symbol": "TQQQ.TO",
@@ -115,7 +115,7 @@
           "brokerSymbol": "XCHP",
           "displayName": "ISHARES SEMICONDUCTOR ETF",
           "shares": 40.0,
-          "avgCost": 72.65
+          "avgCost": 72.6513
         },
         {
           "symbol": "XEG.TO",
@@ -143,18 +143,18 @@
           "brokerSymbol": "ZGLD",
           "displayName": "BMO GOLD BULLION ETF CAD",
           "shares": 35.0,
-          "avgCost": 54.65
+          "avgCost": 54.6514
         },
         {
           "symbol": "ZWA.TO",
           "brokerSymbol": "ZWA",
           "displayName": "BMO CVRD CALL DJIA HDG C$",
           "shares": 50.0,
-          "avgCost": 26.75
+          "avgCost": 26.752
         }
       ],
       "summary": {
-        "totalCost": 25206.85,
+        "totalCost": 25197.05,
         "cashBalance": 62.9
       }
     },
@@ -222,8 +222,8 @@
     }
   ],
   "totalSummary": {
-    "totalCost": 28631.71,
+    "totalCost": 28621.91,
     "totalCash": 1969.9,
-    "totalValue": 30601.61
+    "totalValue": 30591.81
   }
 }

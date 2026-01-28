@@ -49,11 +49,13 @@ async function loadPortfolio() {
 // Format currency
 function formatCurrency(value) {
     if (value === null || value === undefined) return '--';
+    // Use 4 decimals for penny stocks (< $1), otherwise 2 decimals
+    const decimals = Math.abs(value) < 1 ? 4 : 2;
     return new Intl.NumberFormat('en-CA', {
         style: 'currency',
         currency: 'CAD',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
     }).format(value);
 }
 

@@ -56,8 +56,8 @@ def update_portfolio():
                 price_data = fetch_stock_data(symbol)
 
                 if price_data and price_data['price']:
-                    holding['currentPrice'] = round(price_data['price'], 2)
-                    holding['change'] = round(price_data['change'], 2)
+                    holding['currentPrice'] = round(price_data['price'], 4)  # 4 decimals for penny stocks
+                    holding['change'] = round(price_data['change'], 4)
                     holding['changePercent'] = round(price_data['changePercent'], 2)
 
                     # Calculate market value and gains
@@ -123,8 +123,8 @@ def update_portfolio():
             price_data = fetch_stock_data(symbol)
 
             if price_data and price_data['price']:
-                holding['currentPrice'] = round(price_data['price'], 2)
-                holding['change'] = round(price_data['change'], 2)
+                holding['currentPrice'] = round(price_data['price'], 4)  # 4 decimals for penny stocks
+                holding['change'] = round(price_data['change'], 4)
                 holding['changePercent'] = round(price_data['changePercent'], 2)
 
                 # Calculate market value and gains
@@ -137,7 +137,7 @@ def update_portfolio():
                 else:
                     holding['gainLossPercent'] = 0
 
-                print(f"${price_data['price']:.2f} CAD")
+                print(f"${price_data['price']:.4f} CAD")
             else:
                 print("FAILED")
 
