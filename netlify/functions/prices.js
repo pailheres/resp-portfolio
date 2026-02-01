@@ -1,58 +1,47 @@
 /**
  * Netlify Serverless Function: Fetch Real-Time Stock Prices
- * Fetches current prices from Yahoo Finance for all portfolio holdings
+ * Uses yahoo-finance2 library with proper rate limiting
  */
 
-const https = require('https');
+const yahooFinance = require('yahoo-finance2').default;
 
-// Helper function to fetch stock data from Yahoo Finance
-function fetchYahooQuote(symbol) {
-  return new Promise((resolve, reject) => {
-    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
+// Helper to add delay between requests (rate limiting)
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    https.get(url, (res) => {
-      let data = '';
+// Fetch quote for a single symbol with retry logic
+async function fetchQuoteWithRetry(symbol, retries = 2) {
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const quote = await yahooFinance.quote(symbol);
 
-      res.on('data', (chunk) => {
-        data += chunk;
-      });
+      if (!quote || !quote.regularMarketPrice) {
+        console.log(`No price data for ${symbol}`);
+        return null;
+      }
 
-      res.on('end', () => {
-        try {
-          const json = JSON.parse(data);
-          const result = json.chart.result[0];
+      const currentPrice = quote.regularMarketPrice;
+      const previousClose = quote.regularMarketPreviousClose || currentPrice;
+      const change = quote.regularMarketChange || (currentPrice - previousClose);
+      const changePercent = quote.regularMarketChangePercent || ((change / previousClose) * 100);
 
-          if (!result || !result.meta) {
-            resolve(null);
-            return;
-          }
-
-          const meta = result.meta;
-          const quote = result.indicators.quote[0];
-
-          // Get previous close for change calculation
-          const currentPrice = meta.regularMarketPrice || meta.previousClose;
-          const previousClose = meta.chartPreviousClose || meta.previousClose;
-          const change = currentPrice - previousClose;
-          const changePercent = (change / previousClose) * 100;
-
-          resolve({
-            symbol: symbol,
-            price: currentPrice,
-            change: change,
-            changePercent: changePercent,
-            currency: meta.currency || 'CAD'
-          });
-        } catch (error) {
-          console.error(`Error parsing ${symbol}:`, error);
-          resolve(null);
-        }
-      });
-    }).on('error', (error) => {
-      console.error(`Error fetching ${symbol}:`, error);
-      resolve(null);
-    });
-  });
+      return {
+        symbol: symbol,
+        price: currentPrice,
+        change: change,
+        changePercent: changePercent,
+        currency: quote.currency || 'CAD'
+      };
+    } catch (error) {
+      if (i < retries) {
+        console.log(`Retry ${i + 1} for ${symbol}`);
+        await delay(1000); // Wait 1 second before retry
+      } else {
+        console.error(`Failed to fetch ${symbol}:`, error.message);
+        return null;
+      }
+    }
+  }
+  return null;
 }
 
 // Main handler
@@ -93,9 +82,23 @@ exports.handler = async (event, context) => {
   try {
     console.log(`Fetching prices for ${symbols.length} symbols...`);
 
-    // Fetch all symbols in parallel
-    const pricePromises = symbols.map(symbol => fetchYahooQuote(symbol));
-    const results = await Promise.all(pricePromises);
+    // Fetch in batches to avoid rate limiting
+    const batchSize = 5;
+    const results = [];
+
+    for (let i = 0; i < symbols.length; i += batchSize) {
+      const batch = symbols.slice(i, i + batchSize);
+      console.log(`Processing batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(symbols.length / batchSize)}`);
+
+      const batchPromises = batch.map(symbol => fetchQuoteWithRetry(symbol));
+      const batchResults = await Promise.all(batchPromises);
+      results.push(...batchResults);
+
+      // Add delay between batches to avoid rate limiting
+      if (i + batchSize < symbols.length) {
+        await delay(500); // 500ms between batches
+      }
+    }
 
     // Build price map (symbol -> price data)
     const prices = {};
@@ -123,7 +126,9 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({
         prices: prices,
         timestamp: new Date().toISOString(),
-        cached: false
+        cached: false,
+        successCount: Object.keys(prices).length,
+        totalSymbols: symbols.length
       })
     };
   } catch (error) {
