@@ -6,6 +6,9 @@
     <title>RESP Portfolio Tracker</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
     <div class="container">
@@ -16,12 +19,30 @@
                     <h1>📈 RESP Portfolio</h1>
                     <p class="subtitle">Education Savings Tracker</p>
                 </div>
-                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-                    <span class="theme-icon">🌙</span>
-                </button>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span id="userEmail" style="font-size: 0.875rem; opacity: 0.9;"></span>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <button id="authButton" class="theme-toggle" style="display: none;">
+                        <span id="authButtonText">Login</span>
+                    </button>
+                </div>
             </div>
             <div class="last-updated" id="lastUpdated">Loading...</div>
         </header>
+
+        <!-- Login Gate -->
+        <div id="loginGate" class="login-gate" style="display: none;">
+            <div class="login-card">
+                <h2>🔒 Portfolio Access</h2>
+                <p>Please log in to view your portfolio.</p>
+                <button id="loginButton" class="login-button">Login / Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Portfolio Content (hidden until authenticated) -->
+        <div id="portfolioContent" style="display: none;">
 
         <!-- Account Tabs (for multi-account view) -->
         <div class="account-tabs" id="accountTabs" style="display: none;">
@@ -85,6 +106,8 @@
                 </table>
             </div>
         </div>
+
+        </div><!-- End portfolioContent -->
 
         <!-- Footer -->
         <footer class="footer">

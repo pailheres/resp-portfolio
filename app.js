@@ -4,6 +4,74 @@
 let portfolioData = null;
 let currentAccountView = 'all'; // 'all' or account name
 let isMultiAccount = false;
+let currentUser = null;
+
+// Authentication Management
+function initAuth() {
+    // Initialize Netlify Identity
+    if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', user => {
+            currentUser = user;
+            updateAuthUI();
+            if (user) {
+                showPortfolio();
+            } else {
+                showLoginGate();
+            }
+        });
+
+        window.netlifyIdentity.on('login', user => {
+            currentUser = user;
+            updateAuthUI();
+            showPortfolio();
+            window.netlifyIdentity.close();
+        });
+
+        window.netlifyIdentity.on('logout', () => {
+            currentUser = null;
+            updateAuthUI();
+            showLoginGate();
+        });
+
+        // Check current user
+        currentUser = window.netlifyIdentity.currentUser();
+        updateAuthUI();
+    }
+}
+
+function updateAuthUI() {
+    const authButton = document.getElementById('authButton');
+    const authButtonText = document.getElementById('authButtonText');
+    const userEmail = document.getElementById('userEmail');
+
+    if (currentUser) {
+        authButton.style.display = 'block';
+        authButtonText.textContent = 'Logout';
+        userEmail.textContent = currentUser.email;
+        authButton.onclick = () => window.netlifyIdentity.logout();
+    } else {
+        authButton.style.display = 'block';
+        authButtonText.textContent = 'Login';
+        userEmail.textContent = '';
+        authButton.onclick = () => window.netlifyIdentity.open();
+    }
+}
+
+function showLoginGate() {
+    document.getElementById('loginGate').style.display = 'flex';
+    document.getElementById('portfolioContent').style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
+}
+
+function showPortfolio() {
+    document.getElementById('loginGate').style.display = 'none';
+    document.getElementById('portfolioContent').style.display = 'block';
+
+    // Initialize portfolio if not already done
+    if (!portfolioData) {
+        initApp();
+    }
+}
 
 // Theme Management
 function initTheme() {
@@ -414,12 +482,30 @@ function startAutoRefresh() {
 
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    initApp();
-    startAutoRefresh();
+    // Initialize authentication
+    initAuth();
+
+    // Setup login button
+    const loginButton = document.getElementById('loginButton');
+    if (loginButton) {
+        loginButton.addEventListener('click', () => {
+            window.netlifyIdentity.open();
+        });
+    }
 
     // Setup theme toggle
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    // Start auto-refresh (will only work if logged in)
+    startAutoRefresh();
+
+    // Check if user is logged in
+    if (currentUser) {
+        showPortfolio();
+    } else {
+        showLoginGate();
     }
 });
