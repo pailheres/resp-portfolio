@@ -1,0 +1,31 @@
+# Netlify Configuration for Portfolio Tracker
+
+[build]
+  # No build command needed for static site
+  publish = "."
+
+[functions]
+  # Serverless functions directory
+  directory = "netlify/functions"
+
+# Redirect API calls to serverless functions
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Headers for better caching
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/portfolio.json"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
