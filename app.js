@@ -12,13 +12,16 @@ function initAuth() {
         // Initialize and check for existing user
         window.netlifyIdentity.on('init', user => {
             currentUser = user;
+            updateAuthUI();
+
             if (user) {
-                updateAuthUI();
                 showPortfolio();
             } else {
-                updateAuthUI();
                 showLoginGate();
             }
+
+            // Setup custom form handlers after init
+            setupAuthForms();
         });
 
         window.netlifyIdentity.on('login', user => {
@@ -33,9 +36,6 @@ function initAuth() {
             showLoginGate();
         });
 
-        // Setup custom form handlers
-        setupAuthForms();
-
         // Initialize
         window.netlifyIdentity.init();
     }
@@ -43,28 +43,43 @@ function initAuth() {
 
 function setupAuthForms() {
     // Form switchers
-    document.getElementById('showSignup').addEventListener('click', (e) => {
-        e.preventDefault();
-        showSignupForm();
-    });
+    const showSignup = document.getElementById('showSignup');
+    const showLogin = document.getElementById('showLogin');
+    const showForgotPassword = document.getElementById('showForgotPassword');
+    const backToLogin = document.getElementById('backToLogin');
 
-    document.getElementById('showLogin').addEventListener('click', (e) => {
-        e.preventDefault();
-        showLoginForm();
-    });
+    if (showSignup) {
+        showSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSignupForm();
+        });
+    }
 
-    document.getElementById('showForgotPassword').addEventListener('click', (e) => {
-        e.preventDefault();
-        showForgotPasswordForm();
-    });
+    if (showLogin) {
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginForm();
+        });
+    }
 
-    document.getElementById('backToLogin').addEventListener('click', (e) => {
-        e.preventDefault();
-        showLoginForm();
-    });
+    if (showForgotPassword) {
+        showForgotPassword.addEventListener('click', (e) => {
+            e.preventDefault();
+            showForgotPasswordForm();
+        });
+    }
+
+    if (backToLogin) {
+        backToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginForm();
+        });
+    }
 
     // Login form
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
@@ -87,10 +102,13 @@ function setupAuthForms() {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Log In';
         }
-    });
+        });
+    }
 
     // Signup form
-    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    const signupForm = document.getElementById('signupForm');
+    if (signupForm) {
+        signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('signupEmail').value;
         const password = document.getElementById('signupPassword').value;
@@ -127,10 +145,13 @@ function setupAuthForms() {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Create Account';
         }
-    });
+        });
+    }
 
     // Forgot password form
-    document.getElementById('forgotPasswordForm').addEventListener('submit', async (e) => {
+    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+    if (forgotPasswordForm) {
+        forgotPasswordForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('forgotEmail').value;
         const errorEl = document.getElementById('forgotError');
@@ -156,12 +177,16 @@ function setupAuthForms() {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Send Reset Link';
         }
-    });
+        });
+    }
 
     // Logout button
-    document.getElementById('logoutButton').addEventListener('click', () => {
-        window.netlifyIdentity.logout();
-    });
+    const logoutButton = document.getElementById('logoutButton');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            window.netlifyIdentity.logout();
+        });
+    }
 }
 
 function showLoginForm() {
@@ -195,6 +220,11 @@ function showForgotPasswordForm() {
 function updateAuthUI() {
     const logoutButton = document.getElementById('logoutButton');
     const userEmail = document.getElementById('userEmail');
+
+    // Check if elements exist before accessing them
+    if (!logoutButton || !userEmail) {
+        return;
+    }
 
     if (currentUser) {
         logoutButton.style.display = 'block';
@@ -630,30 +660,15 @@ function startAutoRefresh() {
 
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize authentication
-    initAuth();
-
-    // Setup login button
-    const loginButton = document.getElementById('loginButton');
-    if (loginButton) {
-        loginButton.addEventListener('click', () => {
-            window.netlifyIdentity.open();
-        });
-    }
-
     // Setup theme toggle
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleTheme);
     }
 
+    // Initialize authentication (handles showing login gate or portfolio)
+    initAuth();
+
     // Start auto-refresh (will only work if logged in)
     startAutoRefresh();
-
-    // Check if user is logged in
-    if (currentUser) {
-        showPortfolio();
-    } else {
-        showLoginGate();
-    }
 });
