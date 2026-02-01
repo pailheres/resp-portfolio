@@ -9,25 +9,21 @@ let currentUser = null;
 // Authentication Management
 function initAuth() {
     if (window.netlifyIdentity) {
-        // Initialize and check for existing user
         window.netlifyIdentity.on('init', user => {
             currentUser = user;
             updateAuthUI();
-
             if (user) {
                 showPortfolio();
             } else {
                 showLoginGate();
             }
-
-            // Setup custom form handlers after init
-            setupAuthForms();
         });
 
         window.netlifyIdentity.on('login', user => {
             currentUser = user;
             updateAuthUI();
             showPortfolio();
+            window.netlifyIdentity.close();
         });
 
         window.netlifyIdentity.on('logout', () => {
@@ -36,202 +32,26 @@ function initAuth() {
             showLoginGate();
         });
 
-        // Initialize
-        window.netlifyIdentity.init();
+        currentUser = window.netlifyIdentity.currentUser();
+        updateAuthUI();
     }
-}
-
-function setupAuthForms() {
-    // Form switchers
-    const showSignup = document.getElementById('showSignup');
-    const showLogin = document.getElementById('showLogin');
-    const showForgotPassword = document.getElementById('showForgotPassword');
-    const backToLogin = document.getElementById('backToLogin');
-
-    if (showSignup) {
-        showSignup.addEventListener('click', (e) => {
-            e.preventDefault();
-            showSignupForm();
-        });
-    }
-
-    if (showLogin) {
-        showLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            showLoginForm();
-        });
-    }
-
-    if (showForgotPassword) {
-        showForgotPassword.addEventListener('click', (e) => {
-            e.preventDefault();
-            showForgotPasswordForm();
-        });
-    }
-
-    if (backToLogin) {
-        backToLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            showLoginForm();
-        });
-    }
-
-    // Login form
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-        const errorEl = document.getElementById('loginError');
-        const submitBtn = document.getElementById('loginSubmitBtn');
-
-        errorEl.style.display = 'none';
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Logging in...';
-
-        try {
-            const user = await window.netlifyIdentity.gotrue.login(email, password, true);
-            currentUser = user;
-            updateAuthUI();
-            showPortfolio();
-        } catch (error) {
-            console.error('Login error:', error);
-            errorEl.textContent = error.message || 'Login failed. Please check your credentials.';
-            errorEl.style.display = 'block';
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Log In';
-        }
-        });
-    }
-
-    // Signup form
-    const signupForm = document.getElementById('signupForm');
-    if (signupForm) {
-        signupForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('signupEmail').value;
-        const password = document.getElementById('signupPassword').value;
-        const errorEl = document.getElementById('signupError');
-        const submitBtn = document.getElementById('signupSubmitBtn');
-
-        errorEl.style.display = 'none';
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Creating account...';
-
-        try {
-            await window.netlifyIdentity.gotrue.signup(email, password);
-
-            // Show confirmation message
-            errorEl.style.display = 'block';
-            errorEl.style.background = '#d1fae5';
-            errorEl.style.color = '#065f46';
-            errorEl.style.borderColor = '#a7f3d0';
-            errorEl.textContent = 'Account created! Please check your email to confirm your account.';
-
-            // Clear form
-            document.getElementById('signupForm').reset();
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Create Account';
-
-            // Switch to login after 3 seconds
-            setTimeout(() => {
-                showLoginForm();
-            }, 3000);
-        } catch (error) {
-            console.error('Signup error:', error);
-            errorEl.textContent = error.message || 'Signup failed. Please try again.';
-            errorEl.style.display = 'block';
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Create Account';
-        }
-        });
-    }
-
-    // Forgot password form
-    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-    if (forgotPasswordForm) {
-        forgotPasswordForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('forgotEmail').value;
-        const errorEl = document.getElementById('forgotError');
-        const successEl = document.getElementById('forgotSuccess');
-        const submitBtn = document.getElementById('forgotSubmitBtn');
-
-        errorEl.style.display = 'none';
-        successEl.style.display = 'none';
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-
-        try {
-            await window.netlifyIdentity.gotrue.requestPasswordRecovery(email);
-            successEl.textContent = 'Password reset email sent! Check your inbox.';
-            successEl.style.display = 'block';
-            document.getElementById('forgotPasswordForm').reset();
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Send Reset Link';
-        } catch (error) {
-            console.error('Password reset error:', error);
-            errorEl.textContent = error.message || 'Failed to send reset email. Please try again.';
-            errorEl.style.display = 'block';
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Send Reset Link';
-        }
-        });
-    }
-
-    // Logout button
-    const logoutButton = document.getElementById('logoutButton');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', () => {
-            window.netlifyIdentity.logout();
-        });
-    }
-}
-
-function showLoginForm() {
-    document.getElementById('authTitle').textContent = '🔒 Portfolio Access';
-    document.getElementById('authSubtitle').textContent = 'Please log in to view your portfolio.';
-    document.getElementById('loginForm').style.display = 'block';
-    document.getElementById('signupForm').style.display = 'none';
-    document.getElementById('forgotPasswordForm').style.display = 'none';
-    document.getElementById('loginError').style.display = 'none';
-}
-
-function showSignupForm() {
-    document.getElementById('authTitle').textContent = '✨ Create Account';
-    document.getElementById('authSubtitle').textContent = 'Sign up to access your portfolio.';
-    document.getElementById('loginForm').style.display = 'none';
-    document.getElementById('signupForm').style.display = 'block';
-    document.getElementById('forgotPasswordForm').style.display = 'none';
-    document.getElementById('signupError').style.display = 'none';
-}
-
-function showForgotPasswordForm() {
-    document.getElementById('authTitle').textContent = '🔑 Reset Password';
-    document.getElementById('authSubtitle').textContent = 'Enter your email to receive a reset link.';
-    document.getElementById('loginForm').style.display = 'none';
-    document.getElementById('signupForm').style.display = 'none';
-    document.getElementById('forgotPasswordForm').style.display = 'block';
-    document.getElementById('forgotError').style.display = 'none';
-    document.getElementById('forgotSuccess').style.display = 'none';
 }
 
 function updateAuthUI() {
-    const logoutButton = document.getElementById('logoutButton');
+    const authButton = document.getElementById('authButton');
+    const authButtonText = document.getElementById('authButtonText');
     const userEmail = document.getElementById('userEmail');
 
-    // Check if elements exist before accessing them
-    if (!logoutButton || !userEmail) {
-        return;
-    }
-
     if (currentUser) {
-        logoutButton.style.display = 'block';
+        authButton.style.display = 'block';
+        authButtonText.textContent = 'Logout';
         userEmail.textContent = currentUser.email;
+        authButton.onclick = () => window.netlifyIdentity.logout();
     } else {
-        logoutButton.style.display = 'none';
+        authButton.style.display = 'block';
+        authButtonText.textContent = 'Login';
         userEmail.textContent = '';
+        authButton.onclick = () => window.netlifyIdentity.open();
     }
 }
 
@@ -660,15 +480,23 @@ function startAutoRefresh() {
 
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize authentication
+    initAuth();
+
+    // Setup login button
+    const loginButton = document.getElementById('loginButton');
+    if (loginButton) {
+        loginButton.addEventListener('click', () => {
+            window.netlifyIdentity.open();
+        });
+    }
+
     // Setup theme toggle
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleTheme);
     }
 
-    // Initialize authentication (handles showing login gate or portfolio)
-    initAuth();
-
-    // Start auto-refresh (will only work if logged in)
+    // Start auto-refresh
     startAutoRefresh();
 });
