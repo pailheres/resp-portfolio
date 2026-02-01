@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "Multi-account portfolio tracker with real-time prices",
   "dependencies": {
-    "yahoo-finance2": "^2.11.3"
+    "axios": "^1.6.7"
   }
 }
