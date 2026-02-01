@@ -315,9 +315,14 @@ body {
     color: var(--text-secondary);
 }
 
+.login-card form {
+    width: 100%;
+}
+
 .form-group {
     margin-bottom: 20px;
     text-align: left;
+    width: 100%;
 }
 
 .form-group label {
@@ -326,6 +331,7 @@ body {
     color: var(--text-primary);
     font-weight: 500;
     font-size: 0.9rem;
+    text-align: left;
 }
 
 .form-input {
@@ -337,6 +343,7 @@ body {
     color: var(--text-primary);
     font-size: 1rem;
     transition: all 0.2s ease;
+    box-sizing: border-box;
 }
 
 .form-input:focus {

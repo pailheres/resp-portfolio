@@ -6,39 +6,38 @@ let currentAccountView = 'all'; // 'all' or account name
 let isMultiAccount = false;
 let currentUser = null;
 
-// Authentication Management with GoTrue
-let auth = null;
-
+// Authentication Management
 function initAuth() {
-    // Initialize GoTrue client
-    if (window.GoTrue) {
-        auth = new window.GoTrue({
-            APIUrl: 'https://resp-portfolio-tracker.netlify.app/.netlify/identity',
-            audience: '',
-            setCookie: true
-        });
-
-        // Check for existing user session
-        currentUser = auth.currentUser();
-
-        if (currentUser) {
-            // Verify token is still valid
-            currentUser.jwt().then(() => {
+    if (window.netlifyIdentity) {
+        // Initialize and check for existing user
+        window.netlifyIdentity.on('init', user => {
+            currentUser = user;
+            if (user) {
                 updateAuthUI();
                 showPortfolio();
-            }).catch(() => {
-                // Token expired
-                currentUser = null;
+            } else {
                 updateAuthUI();
                 showLoginGate();
-            });
-        } else {
+            }
+        });
+
+        window.netlifyIdentity.on('login', user => {
+            currentUser = user;
+            updateAuthUI();
+            showPortfolio();
+        });
+
+        window.netlifyIdentity.on('logout', () => {
+            currentUser = null;
             updateAuthUI();
             showLoginGate();
-        }
+        });
 
-        // Setup form handlers
+        // Setup custom form handlers
         setupAuthForms();
+
+        // Initialize
+        window.netlifyIdentity.init();
     }
 }
 
@@ -77,10 +76,12 @@ function setupAuthForms() {
         submitBtn.textContent = 'Logging in...';
 
         try {
-            currentUser = await auth.login(email, password, true);
+            const user = await window.netlifyIdentity.gotrue.login(email, password, true);
+            currentUser = user;
             updateAuthUI();
             showPortfolio();
         } catch (error) {
+            console.error('Login error:', error);
             errorEl.textContent = error.message || 'Login failed. Please check your credentials.';
             errorEl.style.display = 'block';
             submitBtn.disabled = false;
@@ -101,7 +102,7 @@ function setupAuthForms() {
         submitBtn.textContent = 'Creating account...';
 
         try {
-            currentUser = await auth.signup(email, password);
+            await window.netlifyIdentity.gotrue.signup(email, password);
 
             // Show confirmation message
             errorEl.style.display = 'block';
@@ -120,6 +121,7 @@ function setupAuthForms() {
                 showLoginForm();
             }, 3000);
         } catch (error) {
+            console.error('Signup error:', error);
             errorEl.textContent = error.message || 'Signup failed. Please try again.';
             errorEl.style.display = 'block';
             submitBtn.disabled = false;
@@ -141,13 +143,14 @@ function setupAuthForms() {
         submitBtn.textContent = 'Sending...';
 
         try {
-            await auth.requestPasswordRecovery(email);
+            await window.netlifyIdentity.gotrue.requestPasswordRecovery(email);
             successEl.textContent = 'Password reset email sent! Check your inbox.';
             successEl.style.display = 'block';
             document.getElementById('forgotPasswordForm').reset();
             submitBtn.disabled = false;
             submitBtn.textContent = 'Send Reset Link';
         } catch (error) {
+            console.error('Password reset error:', error);
             errorEl.textContent = error.message || 'Failed to send reset email. Please try again.';
             errorEl.style.display = 'block';
             submitBtn.disabled = false;
@@ -156,13 +159,8 @@ function setupAuthForms() {
     });
 
     // Logout button
-    document.getElementById('logoutButton').addEventListener('click', async () => {
-        if (currentUser) {
-            await currentUser.logout();
-            currentUser = null;
-            updateAuthUI();
-            showLoginGate();
-        }
+    document.getElementById('logoutButton').addEventListener('click', () => {
+        window.netlifyIdentity.logout();
     });
 }
 
