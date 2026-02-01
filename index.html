@@ -7,8 +7,8 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- GoTrue JS for custom auth -->
+    <script src="https://unpkg.com/gotrue-js@0.9.29"></script>
 </head>
 <body>
     <div class="container">
@@ -24,8 +24,8 @@
                     <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
                         <span class="theme-icon">🌙</span>
                     </button>
-                    <button id="authButton" class="theme-toggle" style="display: none;">
-                        <span id="authButtonText">Login</span>
+                    <button id="logoutButton" class="theme-toggle" style="display: none;">
+                        Logout
                     </button>
                 </div>
             </div>
@@ -35,9 +35,103 @@
         <!-- Login Gate -->
         <div id="loginGate" class="login-gate" style="display: none;">
             <div class="login-card">
-                <h2>🔒 Portfolio Access</h2>
-                <p>Please log in to view your portfolio.</p>
-                <button id="loginButton" class="login-button">Login / Sign Up</button>
+                <h2 id="authTitle">🔒 Portfolio Access</h2>
+                <p id="authSubtitle">Please log in to view your portfolio.</p>
+
+                <!-- Login Form -->
+                <form id="loginForm" style="display: block;">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            name="email"
+                            class="form-input"
+                            autocomplete="username email"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            name="password"
+                            class="form-input"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+                    <div id="loginError" class="auth-error" style="display: none;"></div>
+                    <button type="submit" class="login-button" id="loginSubmitBtn">
+                        Log In
+                    </button>
+                    <p class="auth-toggle">
+                        Don't have an account?
+                        <a href="#" id="showSignup">Sign up</a>
+                    </p>
+                    <p class="auth-toggle">
+                        <a href="#" id="showForgotPassword">Forgot password?</a>
+                    </p>
+                </form>
+
+                <!-- Signup Form -->
+                <form id="signupForm" style="display: none;">
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input
+                            type="email"
+                            id="signupEmail"
+                            name="email"
+                            class="form-input"
+                            autocomplete="username email"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input
+                            type="password"
+                            id="signupPassword"
+                            name="password"
+                            class="form-input"
+                            autocomplete="new-password"
+                            required
+                            minlength="6"
+                        >
+                    </div>
+                    <div id="signupError" class="auth-error" style="display: none;"></div>
+                    <button type="submit" class="login-button" id="signupSubmitBtn">
+                        Create Account
+                    </button>
+                    <p class="auth-toggle">
+                        Already have an account?
+                        <a href="#" id="showLogin">Log in</a>
+                    </p>
+                </form>
+
+                <!-- Forgot Password Form -->
+                <form id="forgotPasswordForm" style="display: none;">
+                    <div class="form-group">
+                        <label for="forgotEmail">Email</label>
+                        <input
+                            type="email"
+                            id="forgotEmail"
+                            name="email"
+                            class="form-input"
+                            autocomplete="username email"
+                            required
+                        >
+                    </div>
+                    <div id="forgotError" class="auth-error" style="display: none;"></div>
+                    <div id="forgotSuccess" class="auth-success" style="display: none;"></div>
+                    <button type="submit" class="login-button" id="forgotSubmitBtn">
+                        Send Reset Link
+                    </button>
+                    <p class="auth-toggle">
+                        <a href="#" id="backToLogin">Back to login</a>
+                    </p>
+                </form>
             </div>
         </div>
 
