@@ -4,72 +4,6 @@
 let portfolioData = null;
 let currentAccountView = 'all'; // 'all' or account name
 let isMultiAccount = false;
-let currentUser = null;
-
-// Authentication Management
-function initAuth() {
-    if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', user => {
-            currentUser = user;
-            updateAuthUI();
-            if (user) {
-                showPortfolio();
-            } else {
-                showLoginGate();
-            }
-        });
-
-        window.netlifyIdentity.on('login', user => {
-            currentUser = user;
-            updateAuthUI();
-            showPortfolio();
-            window.netlifyIdentity.close();
-        });
-
-        window.netlifyIdentity.on('logout', () => {
-            currentUser = null;
-            updateAuthUI();
-            showLoginGate();
-        });
-
-        currentUser = window.netlifyIdentity.currentUser();
-        updateAuthUI();
-    }
-}
-
-function updateAuthUI() {
-    const authButton = document.getElementById('authButton');
-    const authButtonText = document.getElementById('authButtonText');
-    const userEmail = document.getElementById('userEmail');
-
-    if (currentUser) {
-        authButton.style.display = 'block';
-        authButtonText.textContent = 'Logout';
-        userEmail.textContent = currentUser.email;
-        authButton.onclick = () => window.netlifyIdentity.logout();
-    } else {
-        authButton.style.display = 'block';
-        authButtonText.textContent = 'Login';
-        userEmail.textContent = '';
-        authButton.onclick = () => window.netlifyIdentity.open();
-    }
-}
-
-function showLoginGate() {
-    document.getElementById('loginGate').style.display = 'flex';
-    document.getElementById('portfolioContent').style.display = 'none';
-    document.getElementById('loading').style.display = 'none';
-}
-
-function showPortfolio() {
-    document.getElementById('loginGate').style.display = 'none';
-    document.getElementById('portfolioContent').style.display = 'block';
-
-    // Initialize portfolio if not already done
-    if (!portfolioData) {
-        initApp();
-    }
-}
 
 // Theme Management
 function initTheme() {
@@ -113,106 +47,8 @@ async function loadPortfolio() {
 }
 
 // Fetch real-time prices from Netlify serverless function
-async function fetchRealTimePrices() {
-    try {
-        console.log('Fetching real-time prices...');
-        const response = await fetch('/.netlify/functions/prices');
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch prices: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log(`Fetched ${Object.keys(data.prices).length} prices at ${data.timestamp}`);
-
-        return data.prices;
-    } catch (error) {
-        console.error('Error fetching real-time prices:', error);
-        return null;
-    }
-}
-
-// Apply real-time prices to portfolio holdings
-function applyPricesToHoldings(holdings, prices) {
-    if (!prices) return holdings;
-
-    holdings.forEach(holding => {
-        const priceData = prices[holding.symbol];
-
-        if (priceData) {
-            // Round prices: 4 decimals for penny stocks, 2 for others
-            const decimals = priceData.price < 1 ? 4 : 2;
-
-            holding.currentPrice = parseFloat(priceData.price.toFixed(decimals));
-            holding.change = parseFloat(priceData.change.toFixed(decimals));
-            holding.changePercent = parseFloat(priceData.changePercent.toFixed(2));
-
-            // Calculate market value and gains
-            holding.marketValue = parseFloat((holding.shares * holding.currentPrice).toFixed(2));
-            holding.costBasis = parseFloat((holding.shares * holding.avgCost).toFixed(2));
-            holding.gainLoss = parseFloat((holding.marketValue - holding.costBasis).toFixed(2));
-
-            if (holding.costBasis > 0) {
-                holding.gainLossPercent = parseFloat(((holding.gainLoss / holding.costBasis) * 100).toFixed(2));
-            } else {
-                holding.gainLossPercent = 0;
-            }
-        }
-    });
-
-    return holdings;
-}
-
-// Update account summaries with current prices
-function updateAccountSummaries() {
-    if (!isMultiAccount) {
-        // Single account format
-        const holdings = portfolioData.holdings || [];
-        const totalCost = holdings.reduce((sum, h) => sum + (h.costBasis || 0), 0);
-        const totalMarketValue = holdings.reduce((sum, h) => sum + (h.marketValue || 0), 0);
-        const totalGain = totalMarketValue - totalCost;
-
-        portfolioData.summary = {
-            totalCost: parseFloat(totalCost.toFixed(2)),
-            totalMarketValue: parseFloat(totalMarketValue.toFixed(2)),
-            totalGainLoss: parseFloat(totalGain.toFixed(2)),
-            totalGainLossPercent: totalCost > 0 ? parseFloat(((totalGain / totalCost) * 100).toFixed(2)) : 0
-        };
-    } else {
-        // Multi-account format
-        let totalCostAll = 0;
-        let totalMarketValueAll = 0;
-        let totalCashAll = 0;
-
-        portfolioData.accounts.forEach(account => {
-            const accountCost = account.holdings.reduce((sum, h) => sum + (h.costBasis || 0), 0);
-            const accountMarketValue = account.holdings.reduce((sum, h) => sum + (h.marketValue || 0), 0);
-            const accountGain = accountMarketValue - accountCost;
-
-            account.summary = {
-                totalCost: parseFloat(accountCost.toFixed(2)),
-                totalMarketValue: parseFloat(accountMarketValue.toFixed(2)),
-                totalGainLoss: parseFloat(accountGain.toFixed(2)),
-                totalGainLossPercent: accountCost > 0 ? parseFloat(((accountGain / accountCost) * 100).toFixed(2)) : 0,
-                cashBalance: account.cash
-            };
-
-            totalCostAll += accountCost;
-            totalMarketValueAll += accountMarketValue;
-            totalCashAll += account.cash;
-        });
-
-        const totalGainAll = totalMarketValueAll - totalCostAll;
-        portfolioData.totalSummary = {
-            totalCost: parseFloat(totalCostAll.toFixed(2)),
-            totalMarketValue: parseFloat(totalMarketValueAll.toFixed(2)),
-            totalGainLoss: parseFloat(totalGainAll.toFixed(2)),
-            totalGainLossPercent: totalCostAll > 0 ? parseFloat(((totalGainAll / totalCostAll) * 100).toFixed(2)) : 0,
-            totalCash: parseFloat(totalCashAll.toFixed(2)),
-            totalValue: parseFloat((totalMarketValueAll + totalCashAll).toFixed(2))
-        };
-    }
-}
+// Portfolio data is already complete from GitHub Actions update_prices.py
+// No need to fetch prices separately
 
 // Format currency
 function formatCurrency(value) {
@@ -418,35 +254,10 @@ function showError() {
 // Main application flow
 async function initApp() {
     try {
-        // Load portfolio data (holdings only, no prices yet)
+        // Load portfolio data (already includes prices from GitHub Actions)
         await loadPortfolio();
 
-        // Fetch real-time prices from serverless function
-        const prices = await fetchRealTimePrices();
-
-        // Apply prices to all holdings
-        if (isMultiAccount) {
-            portfolioData.accounts.forEach(account => {
-                applyPricesToHoldings(account.holdings, prices);
-            });
-        } else {
-            applyPricesToHoldings(portfolioData.holdings, prices);
-        }
-
-        // Update summaries with current prices
-        updateAccountSummaries();
-
-        // Update timestamp to now
-        portfolioData.lastUpdated = new Date().toLocaleString('en-US', {
-            timeZone: 'America/New_York',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            timeZoneName: 'short'
-        });
+        // Update last updated timestamp
         updateLastUpdated();
 
         // Hide loading, show data
@@ -458,10 +269,10 @@ async function initApp() {
         // Get current view data
         const viewData = getCurrentViewData();
 
-        // Render holdings with real-time prices
+        // Render holdings
         renderHoldings(viewData.holdings);
 
-        // Update summary with real-time data
+        // Update summary
         updateSummary();
 
     } catch (error) {
@@ -480,23 +291,15 @@ function startAutoRefresh() {
 
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize authentication
-    initAuth();
-
-    // Setup login button
-    const loginButton = document.getElementById('loginButton');
-    if (loginButton) {
-        loginButton.addEventListener('click', () => {
-            window.netlifyIdentity.open();
-        });
-    }
-
     // Setup theme toggle
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleTheme);
     }
 
-    // Start auto-refresh
+    // Initialize portfolio
+    initApp();
+
+    // Start auto-refresh (every 5 minutes)
     startAutoRefresh();
 });

@@ -1,8 +1,0 @@
-{
-  "name": "resp-portfolio-tracker",
-  "version": "1.0.0",
-  "description": "Multi-account portfolio tracker with real-time prices",
-  "dependencies": {
-    "axios": "^1.6.7"
-  }
-}
