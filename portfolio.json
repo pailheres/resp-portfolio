@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-17 12:17:34 EDT",
+  "lastUpdated": "2026-07-17 15:54:20 EDT",
   "accounts": [
     {
       "name": "Main",
@@ -11,13 +11,13 @@
           "displayName": "APPLE INC CDR C$HDG",
           "shares": 15.0,
           "avgCost": 36.99,
-          "currentPrice": 46.68,
-          "change": -0.37,
-          "changePercent": -0.79,
-          "marketValue": 700.2,
+          "currentPrice": 47.15,
+          "change": 0.1,
+          "changePercent": 0.21,
+          "marketValue": 707.25,
           "costBasis": 554.85,
-          "gainLoss": 145.35,
-          "gainLossPercent": 26.2
+          "gainLoss": 152.4,
+          "gainLossPercent": 27.47
         },
         {
           "symbol": "AMZN.TO",
@@ -25,13 +25,13 @@
           "displayName": "AMAZON.COM INC CDR C$HDG",
           "shares": 10.0,
           "avgCost": 26.67,
-          "currentPrice": 28.36,
-          "change": -0.17,
-          "changePercent": -0.6,
-          "marketValue": 283.6,
+          "currentPrice": 28.31,
+          "change": -0.22,
+          "changePercent": -0.77,
+          "marketValue": 283.1,
           "costBasis": 266.7,
-          "gainLoss": 16.9,
-          "gainLossPercent": 6.34
+          "gainLoss": 16.4,
+          "gainLossPercent": 6.15
         },
         {
           "symbol": "ASML.TO",
@@ -39,13 +39,13 @@
           "displayName": "ASML HOLDING NV CDR C$HDG",
           "shares": 20.0,
           "avgCost": 31.16,
-          "currentPrice": 50.5,
-          "change": 0.2,
-          "changePercent": 0.4,
-          "marketValue": 1010.0,
+          "currentPrice": 49.72,
+          "change": -0.58,
+          "changePercent": -1.15,
+          "marketValue": 994.4,
           "costBasis": 623.2,
-          "gainLoss": 386.8,
-          "gainLossPercent": 62.07
+          "gainLoss": 371.2,
+          "gainLossPercent": 59.56
         },
         {
           "symbol": "AYA.TO",
@@ -53,13 +53,13 @@
           "displayName": "AYA OR & ARGENT INC",
           "shares": 30.0,
           "avgCost": 16.93,
-          "currentPrice": 26.56,
-          "change": 0.23,
-          "changePercent": 0.87,
-          "marketValue": 796.8,
+          "currentPrice": 26.29,
+          "change": -0.04,
+          "changePercent": -0.15,
+          "marketValue": 788.7,
           "costBasis": 507.9,
-          "gainLoss": 288.9,
-          "gainLossPercent": 56.88
+          "gainLoss": 280.8,
+          "gainLossPercent": 55.29
         },
         {
           "symbol": "GIGA.V",
@@ -81,13 +81,13 @@
           "displayName": "ALPHABET INC CDR C$HDG",
           "shares": 20.0,
           "avgCost": 50.89,
-          "currentPrice": 55.2,
-          "change": -1.24,
-          "changePercent": -2.2,
-          "marketValue": 1104.0,
+          "currentPrice": 55.1,
+          "change": -1.34,
+          "changePercent": -2.37,
+          "marketValue": 1102.0,
           "costBasis": 1017.8,
-          "gainLoss": 86.2,
-          "gainLossPercent": 8.47
+          "gainLoss": 84.2,
+          "gainLossPercent": 8.27
         },
         {
           "symbol": "MA.TO",
@@ -123,13 +123,13 @@
           "displayName": "NVIDIA CORP CDR C$HDG",
           "shares": 20.0,
           "avgCost": 39.83,
-          "currentPrice": 45.87,
-          "change": -0.51,
-          "changePercent": -1.1,
-          "marketValue": 917.4,
+          "currentPrice": 45.51,
+          "change": -0.87,
+          "changePercent": -1.88,
+          "marketValue": 910.2,
           "costBasis": 796.6,
-          "gainLoss": 120.8,
-          "gainLossPercent": 15.16
+          "gainLoss": 113.6,
+          "gainLossPercent": 14.26
         },
         {
           "symbol": "SURG.V",
@@ -137,13 +137,13 @@
           "displayName": "SURGE COPPER CORP",
           "shares": 500.0,
           "avgCost": 0.57,
-          "currentPrice": 0.455,
-          "change": 0.015,
-          "changePercent": 3.41,
-          "marketValue": 227.5,
+          "currentPrice": 0.46,
+          "change": 0.02,
+          "changePercent": 4.55,
+          "marketValue": 230.0,
           "costBasis": 285.0,
-          "gainLoss": -57.5,
-          "gainLossPercent": -20.18
+          "gainLoss": -55.0,
+          "gainLossPercent": -19.3
         },
         {
           "symbol": "TPE.TO",
@@ -151,13 +151,13 @@
           "displayName": "TD INTL EQTY INDX     ETF",
           "shares": 50.0,
           "avgCost": 24.286,
-          "currentPrice": 30.15,
-          "change": -0.23,
-          "changePercent": -0.76,
-          "marketValue": 1507.5,
+          "currentPrice": 30.14,
+          "change": -0.24,
+          "changePercent": -0.79,
+          "marketValue": 1507.0,
           "costBasis": 1214.3,
-          "gainLoss": 293.2,
-          "gainLossPercent": 24.15
+          "gainLoss": 292.7,
+          "gainLossPercent": 24.1
         },
         {
           "symbol": "TPU.TO",
@@ -165,13 +165,13 @@
           "displayName": "TD US EQUITY INDEX ETF",
           "shares": 67.0,
           "avgCost": 46.3552,
-          "currentPrice": 59.74,
-          "change": -0.52,
-          "changePercent": -0.86,
-          "marketValue": 4002.58,
+          "currentPrice": 59.56,
+          "change": -0.7,
+          "changePercent": -1.16,
+          "marketValue": 3990.52,
           "costBasis": 3105.8,
-          "gainLoss": 896.78,
-          "gainLossPercent": 28.87
+          "gainLoss": 884.72,
+          "gainLossPercent": 28.49
         },
         {
           "symbol": "TQQQ.TO",
@@ -179,13 +179,13 @@
           "displayName": "BETAPRO 3XNSDQ100 DLY ETF",
           "shares": 25.0,
           "avgCost": 26.35,
-          "currentPrice": 35.05,
-          "change": -0.99,
-          "changePercent": -2.75,
-          "marketValue": 876.25,
+          "currentPrice": 34.61,
+          "change": -1.43,
+          "changePercent": -3.97,
+          "marketValue": 865.25,
           "costBasis": 658.75,
-          "gainLoss": 217.5,
-          "gainLossPercent": 33.02
+          "gainLoss": 206.5,
+          "gainLossPercent": 31.35
         },
         {
           "symbol": "VFV.TO",
@@ -193,13 +193,13 @@
           "displayName": "VANGUARD S&P 500 IDX ETF",
           "shares": 10.0,
           "avgCost": 169.36,
-          "currentPrice": 185.97,
-          "change": -1.66,
-          "changePercent": -0.88,
-          "marketValue": 1859.7,
+          "currentPrice": 185.41,
+          "change": -2.22,
+          "changePercent": -1.18,
+          "marketValue": 1854.1,
           "costBasis": 1693.6,
-          "gainLoss": 166.1,
-          "gainLossPercent": 9.81
+          "gainLoss": 160.5,
+          "gainLossPercent": 9.48
         },
         {
           "symbol": "XCHP.TO",
@@ -207,13 +207,13 @@
           "displayName": "ISHARES SEMICONDUCTOR ETF",
           "shares": 40.0,
           "avgCost": 72.6513,
-          "currentPrice": 128.24,
-          "change": -1.16,
-          "changePercent": -0.9,
-          "marketValue": 5129.6,
+          "currentPrice": 127.54,
+          "change": -1.86,
+          "changePercent": -1.44,
+          "marketValue": 5101.6,
           "costBasis": 2906.05,
-          "gainLoss": 2223.55,
-          "gainLossPercent": 76.51
+          "gainLoss": 2195.55,
+          "gainLossPercent": 75.55
         },
         {
           "symbol": "XEG.TO",
@@ -221,13 +221,13 @@
           "displayName": "ISHARES S&PTSX CAP EN ETF",
           "shares": 70.0,
           "avgCost": 21.6629,
-          "currentPrice": 25.94,
-          "change": 0.26,
-          "changePercent": 1.01,
-          "marketValue": 1815.8,
+          "currentPrice": 26.11,
+          "change": 0.43,
+          "changePercent": 1.67,
+          "marketValue": 1827.7,
           "costBasis": 1516.4,
-          "gainLoss": 299.4,
-          "gainLossPercent": 19.74
+          "gainLoss": 311.3,
+          "gainLossPercent": 20.53
         },
         {
           "symbol": "XIC.TO",
@@ -235,13 +235,13 @@
           "displayName": "ISHRS CORE S&P/TSX CAPPED",
           "shares": 20.0,
           "avgCost": 51.06,
-          "currentPrice": 56.4,
-          "change": -0.04,
-          "changePercent": -0.07,
-          "marketValue": 1128.0,
+          "currentPrice": 56.26,
+          "change": -0.18,
+          "changePercent": -0.32,
+          "marketValue": 1125.2,
           "costBasis": 1021.2,
-          "gainLoss": 106.8,
-          "gainLossPercent": 10.46
+          "gainLoss": 104.0,
+          "gainLossPercent": 10.18
         },
         {
           "symbol": "XQQ.TO",
@@ -249,13 +249,13 @@
           "displayName": "ISHARES NASDQ 100 IDX ETF",
           "shares": 10.0,
           "avgCost": 54.15,
-          "currentPrice": 70.02,
-          "change": -0.64,
-          "changePercent": -0.91,
-          "marketValue": 700.2,
+          "currentPrice": 69.74,
+          "change": -0.92,
+          "changePercent": -1.3,
+          "marketValue": 697.4,
           "costBasis": 541.5,
-          "gainLoss": 158.7,
-          "gainLossPercent": 29.31
+          "gainLoss": 155.9,
+          "gainLossPercent": 28.79
         },
         {
           "symbol": "XSP.TO",
@@ -263,13 +263,13 @@
           "displayName": "ISHRS CORE S&P500 HDG ETF",
           "shares": 44.0,
           "avgCost": 66.2182,
-          "currentPrice": 75.21,
-          "change": -0.5,
-          "changePercent": -0.66,
-          "marketValue": 3309.24,
+          "currentPrice": 74.96,
+          "change": -0.75,
+          "changePercent": -0.99,
+          "marketValue": 3298.24,
           "costBasis": 2913.6,
-          "gainLoss": 395.64,
-          "gainLossPercent": 13.58
+          "gainLoss": 384.64,
+          "gainLossPercent": 13.2
         },
         {
           "symbol": "XWD.TO",
@@ -277,13 +277,13 @@
           "displayName": "ISHARES MSCI WRLD IDX ETF",
           "shares": 15.0,
           "avgCost": 110.25,
-          "currentPrice": 121.62,
-          "change": -0.86,
-          "changePercent": -0.7,
-          "marketValue": 1824.3,
+          "currentPrice": 121.11,
+          "change": -1.37,
+          "changePercent": -1.12,
+          "marketValue": 1816.65,
           "costBasis": 1653.75,
-          "gainLoss": 170.55,
-          "gainLossPercent": 10.31
+          "gainLoss": 162.9,
+          "gainLossPercent": 9.85
         },
         {
           "symbol": "ZGLD.TO",
@@ -291,13 +291,13 @@
           "displayName": "BMO GOLD BULLION ETF CAD",
           "shares": 35.0,
           "avgCost": 54.6514,
-          "currentPrice": 60.39,
-          "change": 0.43,
-          "changePercent": 0.72,
-          "marketValue": 2113.65,
+          "currentPrice": 60.3,
+          "change": 0.34,
+          "changePercent": 0.57,
+          "marketValue": 2110.5,
           "costBasis": 1912.8,
-          "gainLoss": 200.85,
-          "gainLossPercent": 10.5
+          "gainLoss": 197.7,
+          "gainLossPercent": 10.34
         },
         {
           "symbol": "ZWA.TO",
@@ -305,20 +305,20 @@
           "displayName": "BMO CVRD CALL DJIA HDG C$",
           "shares": 50.0,
           "avgCost": 26.752,
-          "currentPrice": 28.46,
-          "change": -0.12,
-          "changePercent": -0.42,
-          "marketValue": 1423.0,
+          "currentPrice": 28.39,
+          "change": -0.19,
+          "changePercent": -0.66,
+          "marketValue": 1419.5,
           "costBasis": 1337.6,
-          "gainLoss": 85.4,
-          "gainLossPercent": 6.38
+          "gainLoss": 81.9,
+          "gainLossPercent": 6.12
         }
       ],
       "summary": {
         "totalCost": 26224.4,
-        "totalMarketValue": 32164.02,
-        "totalGainLoss": 5939.62,
-        "totalGainLossPercent": 22.65,
+        "totalMarketValue": 32064.01,
+        "totalGainLoss": 5839.61,
+        "totalGainLossPercent": 22.27,
         "cashBalance": 6.45
       }
     },
@@ -332,13 +332,13 @@
           "displayName": "TD INTL EQTY INDX     ETF",
           "shares": 20.0,
           "avgCost": 26.16,
-          "currentPrice": 30.15,
-          "change": -0.23,
-          "changePercent": -0.76,
-          "marketValue": 603.0,
+          "currentPrice": 30.14,
+          "change": -0.24,
+          "changePercent": -0.79,
+          "marketValue": 602.8,
           "costBasis": 523.2,
-          "gainLoss": 79.8,
-          "gainLossPercent": 15.25
+          "gainLoss": 79.6,
+          "gainLossPercent": 15.21
         },
         {
           "symbol": "XIC.TO",
@@ -346,13 +346,13 @@
           "displayName": "ISHRS CORE S&P/TSX CAPPED",
           "shares": 16.0,
           "avgCost": 49.1306,
-          "currentPrice": 56.4,
-          "change": -0.04,
-          "changePercent": -0.07,
-          "marketValue": 902.4,
+          "currentPrice": 56.26,
+          "change": -0.18,
+          "changePercent": -0.32,
+          "marketValue": 900.16,
           "costBasis": 786.09,
-          "gainLoss": 116.31,
-          "gainLossPercent": 14.8
+          "gainLoss": 114.07,
+          "gainLossPercent": 14.51
         },
         {
           "symbol": "XSP.TO",
@@ -360,20 +360,20 @@
           "displayName": "ISHRS CORE S&P500 HDG ETF",
           "shares": 10.0,
           "avgCost": 66.25,
-          "currentPrice": 75.21,
-          "change": -0.5,
-          "changePercent": -0.66,
-          "marketValue": 752.1,
+          "currentPrice": 74.96,
+          "change": -0.75,
+          "changePercent": -0.99,
+          "marketValue": 749.6,
           "costBasis": 662.5,
-          "gainLoss": 89.6,
-          "gainLossPercent": 13.52
+          "gainLoss": 87.1,
+          "gainLossPercent": 13.15
         }
       ],
       "summary": {
         "totalCost": 1971.79,
-        "totalMarketValue": 2257.5,
-        "totalGainLoss": 285.71,
-        "totalGainLossPercent": 14.49,
+        "totalMarketValue": 2252.56,
+        "totalGainLoss": 280.77,
+        "totalGainLossPercent": 14.24,
         "cashBalance": 44.65
       }
     },
@@ -387,13 +387,13 @@
           "displayName": "ISHARES SEMICONDUCTOR ETF",
           "shares": 10.0,
           "avgCost": 59.61,
-          "currentPrice": 128.24,
-          "change": -1.16,
-          "changePercent": -0.9,
-          "marketValue": 1282.4,
+          "currentPrice": 127.54,
+          "change": -1.86,
+          "changePercent": -1.44,
+          "marketValue": 1275.4,
           "costBasis": 596.1,
-          "gainLoss": 686.3,
-          "gainLossPercent": 115.13
+          "gainLoss": 679.3,
+          "gainLossPercent": 113.96
         },
         {
           "symbol": "XIC.TO",
@@ -401,13 +401,13 @@
           "displayName": "ISHRS CORE S&P/TSX CAPPED",
           "shares": 25.0,
           "avgCost": 47.808,
-          "currentPrice": 56.4,
-          "change": -0.04,
-          "changePercent": -0.07,
-          "marketValue": 1410.0,
+          "currentPrice": 56.26,
+          "change": -0.18,
+          "changePercent": -0.32,
+          "marketValue": 1406.5,
           "costBasis": 1195.2,
-          "gainLoss": 214.8,
-          "gainLossPercent": 17.97
+          "gainLoss": 211.3,
+          "gainLossPercent": 17.68
         },
         {
           "symbol": "XSP.TO",
@@ -415,30 +415,30 @@
           "displayName": "ISHRS CORE S&P500 HDG ETF",
           "shares": 10.0,
           "avgCost": 66.23,
-          "currentPrice": 75.21,
-          "change": -0.5,
-          "changePercent": -0.66,
-          "marketValue": 752.1,
+          "currentPrice": 74.96,
+          "change": -0.75,
+          "changePercent": -0.99,
+          "marketValue": 749.6,
           "costBasis": 662.3,
-          "gainLoss": 89.8,
-          "gainLossPercent": 13.56
+          "gainLoss": 87.3,
+          "gainLossPercent": 13.18
         }
       ],
       "summary": {
         "totalCost": 2453.6,
-        "totalMarketValue": 3444.5,
-        "totalGainLoss": 990.9,
-        "totalGainLossPercent": 40.39,
+        "totalMarketValue": 3431.5,
+        "totalGainLoss": 977.9,
+        "totalGainLossPercent": 39.86,
         "cashBalance": 861.82
       }
     }
   ],
   "totalSummary": {
     "totalCost": 30649.79,
-    "totalMarketValue": 37866.02,
-    "totalGainLoss": 7216.23,
-    "totalGainLossPercent": 23.54,
+    "totalMarketValue": 37748.07,
+    "totalGainLoss": 7098.28,
+    "totalGainLossPercent": 23.16,
     "totalCash": 912.92,
-    "totalValue": 38778.94
+    "totalValue": 38660.99
   }
 }
