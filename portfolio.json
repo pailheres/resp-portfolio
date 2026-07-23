@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-23 16:04:25 EDT",
+  "lastUpdated": "2026-07-23 18:29:30 EDT",
   "accounts": [
     {
       "name": "Main",
@@ -83,7 +83,7 @@
           "avgCost": 50.89,
           "currentPrice": 50.97,
           "change": -3.67,
-          "changePercent": -6.73,
+          "changePercent": -6.72,
           "marketValue": 1019.4,
           "costBasis": 1017.8,
           "gainLoss": 1.6,
@@ -293,7 +293,7 @@
           "avgCost": 54.6514,
           "currentPrice": 61.19,
           "change": -1.22,
-          "changePercent": -1.96,
+          "changePercent": -1.95,
           "marketValue": 2141.65,
           "costBasis": 1912.8,
           "gainLoss": 228.85,
