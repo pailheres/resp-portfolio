@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-11 21:40:05 EST",
+  "lastUpdated": "2026-11-11 21:56:16 EST",
   "accounts": [
     {
       "name": "Main",
@@ -40,8 +40,8 @@
           "shares": 20.0,
           "avgCost": 31.16,
           "currentPrice": 44.87,
-          "change": 1.47,
-          "changePercent": 3.39,
+          "change": 1.09,
+          "changePercent": 2.49,
           "marketValue": 897.4,
           "costBasis": 623.2,
           "gainLoss": 274.2,
@@ -138,13 +138,13 @@
           "shares": 2.0,
           "avgCost": 244.185,
           "currency": "USD",
-          "currentPrice": 199.1717,
-          "change": -4.7602,
+          "currentPrice": 199.2877,
+          "change": -4.7629,
           "changePercent": -2.33,
-          "marketValue": 398.34,
+          "marketValue": 398.58,
           "costBasis": 488.37,
-          "gainLoss": -90.03,
-          "gainLossPercent": -18.43
+          "gainLoss": -89.79,
+          "gainLossPercent": -18.39
         },
         {
           "symbol": "SURG.V",
@@ -166,13 +166,13 @@
           "displayName": "TD INTL EQTY INDX     ETF",
           "shares": 60.0,
           "avgCost": 25.2548,
-          "currentPrice": 30.89,
-          "change": 0.26,
-          "changePercent": 0.85,
-          "marketValue": 1853.4,
+          "currentPrice": 30.88,
+          "change": 0.25,
+          "changePercent": 0.82,
+          "marketValue": 1852.8,
           "costBasis": 1515.29,
-          "gainLoss": 338.11,
-          "gainLossPercent": 22.31
+          "gainLoss": 337.51,
+          "gainLossPercent": 22.27
         },
         {
           "symbol": "TPU.TO",
@@ -180,12 +180,12 @@
           "displayName": "TD US EQUITY INDEX ETF",
           "shares": 70.0,
           "avgCost": 46.997,
-          "currentPrice": 61.872,
-          "change": 1.242,
-          "changePercent": 2.05,
-          "marketValue": 4331.04,
+          "currentPrice": 61.87,
+          "change": 1.07,
+          "changePercent": 1.76,
+          "marketValue": 4330.9,
           "costBasis": 3289.79,
-          "gainLoss": 1041.25,
+          "gainLoss": 1041.11,
           "gainLossPercent": 31.65
         },
         {
@@ -320,20 +320,20 @@
           "displayName": "BMO CVRD CALL DJIA HDG C$",
           "shares": 50.0,
           "avgCost": 26.2228,
-          "currentPrice": 27.81,
-          "change": 0.2,
-          "changePercent": 0.72,
-          "marketValue": 1390.5,
+          "currentPrice": 27.78,
+          "change": 0.08,
+          "changePercent": 0.29,
+          "marketValue": 1389.0,
           "costBasis": 1311.14,
-          "gainLoss": 79.36,
-          "gainLossPercent": 6.05
+          "gainLoss": 77.86,
+          "gainLossPercent": 5.94
         }
       ],
       "summary": {
         "totalCost": 27372.94,
-        "totalMarketValue": 32926.98,
-        "totalGainLoss": 5554.04,
-        "totalGainLossPercent": 20.29,
+        "totalMarketValue": 32924.98,
+        "totalGainLoss": 5552.04,
+        "totalGainLossPercent": 20.28,
         "cashBalance": 10158.74
       }
     },
@@ -506,10 +506,10 @@
   ],
   "totalSummary": {
     "totalCost": 34053.11,
-    "totalMarketValue": 40837.91,
-    "totalGainLoss": 6784.8,
+    "totalMarketValue": 40835.91,
+    "totalGainLoss": 6782.8,
     "totalGainLossPercent": 19.92,
     "totalCash": 10301.1,
-    "totalValue": 51139.01
+    "totalValue": 51137.01
   }
 }
