@@ -24,6 +24,44 @@ def fetch_stock_data(symbol):
         print(f"Error fetching {symbol}: {e}")
         return None
 
+_usd_cad_rate = None
+
+
+def get_usd_cad_rate():
+    """USD -> CAD exchange rate from Yahoo Finance (fetched once per run, None if unavailable)"""
+    global _usd_cad_rate
+    if _usd_cad_rate is None:
+        _usd_cad_rate = 0
+        try:
+            info = yf.Ticker('USDCAD=X').info
+            rate = info.get('regularMarketPrice') or info.get('previousClose')
+            if rate and 1.0 < float(rate) < 2.0:  # sanity check
+                _usd_cad_rate = float(rate)
+                print(f"(USD/CAD {_usd_cad_rate:.4f})", end=' ')
+        except Exception as e:
+            print(f"Error fetching USD/CAD rate: {e}")
+    return _usd_cad_rate or None
+
+
+def price_in_cad(price_data):
+    """Return (price, change) in CAD, or (None, None) when no usable price"""
+    if not price_data or not price_data['price']:
+        return None, None
+
+    price = price_data['price']
+    change = price_data['change'] or 0
+
+    if price_data.get('currency') == 'USD':
+        # US-listed security: the portfolio is in CAD, so convert
+        rate = get_usd_cad_rate()
+        if not rate:
+            return None, None
+        price *= rate
+        change *= rate
+
+    return price, change
+
+
 def update_portfolio():
     """Update portfolio.json with current prices (multi-account format)"""
 
@@ -54,11 +92,12 @@ def update_portfolio():
                 print(f"  {symbol}...", end=' ')
 
                 price_data = fetch_stock_data(symbol)
+                price, change = price_in_cad(price_data)
 
-                if price_data and price_data['price']:
-                    holding['currentPrice'] = round(price_data['price'], 4)  # 4 decimals for penny stocks
-                    holding['change'] = round(price_data['change'], 4)
-                    holding['changePercent'] = round(price_data['changePercent'], 2)
+                if price:
+                    holding['currentPrice'] = round(price, 4)  # 4 decimals for penny stocks
+                    holding['change'] = round(change, 4)
+                    holding['changePercent'] = round(price_data['changePercent'] or 0, 2)
 
                     # Calculate market value and gains
                     holding['marketValue'] = round(holding['shares'] * holding['currentPrice'], 2)
@@ -73,7 +112,12 @@ def update_portfolio():
                     account_cost += holding['costBasis']
                     account_market_value += holding['marketValue']
 
-                    print(f"${price_data['price']:.2f}")
+                    print(f"${price:.2f}")
+                elif 'marketValue' in holding and 'costBasis' in holding:
+                    # No fresh price: keep the last known one so the totals stay complete
+                    account_cost += holding['costBasis']
+                    account_market_value += holding['marketValue']
+                    print("FAILED (kept last known price)")
                 else:
                     print("FAILED")
 
