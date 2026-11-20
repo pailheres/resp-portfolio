@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-19 19:57:08 EST",
+  "lastUpdated": "2026-11-19 21:28:07 EST",
   "accounts": [
     {
       "name": "Main",
@@ -138,12 +138,12 @@
           "shares": 2.0,
           "avgCost": 244.185,
           "currency": "USD",
-          "currentPrice": 198.4477,
-          "change": -7.2682,
+          "currentPrice": 198.4602,
+          "change": -7.2686,
           "changePercent": -3.53,
-          "marketValue": 396.9,
+          "marketValue": 396.92,
           "costBasis": 488.37,
-          "gainLoss": -91.47,
+          "gainLoss": -91.45,
           "gainLossPercent": -18.73
         },
         {
@@ -331,8 +331,8 @@
       ],
       "summary": {
         "totalCost": 27372.94,
-        "totalMarketValue": 30412.6,
-        "totalGainLoss": 3039.66,
+        "totalMarketValue": 30412.62,
+        "totalGainLoss": 3039.68,
         "totalGainLossPercent": 11.1,
         "cashBalance": 10158.74
       }
@@ -506,10 +506,10 @@
   ],
   "totalSummary": {
     "totalCost": 34053.11,
-    "totalMarketValue": 37758.45,
-    "totalGainLoss": 3705.34,
+    "totalMarketValue": 37758.47,
+    "totalGainLoss": 3705.36,
     "totalGainLossPercent": 10.88,
     "totalCash": 10301.1,
-    "totalValue": 48059.55
+    "totalValue": 48059.57
   }
 }
