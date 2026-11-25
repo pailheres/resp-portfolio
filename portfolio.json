@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-24 18:47:38 EST",
+  "lastUpdated": "2026-11-24 21:50:23 EST",
   "accounts": [
     {
       "name": "Main",
@@ -138,13 +138,13 @@
           "shares": 2.0,
           "avgCost": 244.185,
           "currency": "USD",
-          "currentPrice": 179.5183,
-          "change": -10.7588,
+          "currentPrice": 179.5007,
+          "change": -10.7578,
           "changePercent": -5.65,
-          "marketValue": 359.04,
+          "marketValue": 359.0,
           "costBasis": 488.37,
-          "gainLoss": -129.33,
-          "gainLossPercent": -26.48
+          "gainLoss": -129.37,
+          "gainLossPercent": -26.49
         },
         {
           "symbol": "SURG.V",
@@ -331,8 +331,8 @@
       ],
       "summary": {
         "totalCost": 27372.94,
-        "totalMarketValue": 29978.59,
-        "totalGainLoss": 2605.65,
+        "totalMarketValue": 29978.55,
+        "totalGainLoss": 2605.61,
         "totalGainLossPercent": 9.52,
         "cashBalance": 10158.74
       }
@@ -506,10 +506,10 @@
   ],
   "totalSummary": {
     "totalCost": 34053.11,
-    "totalMarketValue": 37196.24,
-    "totalGainLoss": 3143.13,
+    "totalMarketValue": 37196.2,
+    "totalGainLoss": 3143.09,
     "totalGainLossPercent": 9.23,
     "totalCash": 10301.1,
-    "totalValue": 47497.34
+    "totalValue": 47497.3
   }
 }
