@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-24 21:50:23 EST",
+  "lastUpdated": "2026-11-24 23:25:33 EST",
   "accounts": [
     {
       "name": "Main",
@@ -109,13 +109,13 @@
           "displayName": "NBI GLOBAL PRIVATE EQ ETF",
           "shares": 20.0,
           "avgCost": 59.7405,
-          "currentPrice": 45.93,
-          "change": -0.62,
-          "changePercent": -1.33,
-          "marketValue": 918.6,
+          "currentPrice": 46.78,
+          "change": 0.23,
+          "changePercent": 0.49,
+          "marketValue": 935.6,
           "costBasis": 1194.81,
-          "gainLoss": -276.21,
-          "gainLossPercent": -23.12
+          "gainLoss": -259.21,
+          "gainLossPercent": -21.69
         },
         {
           "symbol": "NVDA.TO",
@@ -138,13 +138,13 @@
           "shares": 2.0,
           "avgCost": 244.185,
           "currency": "USD",
-          "currentPrice": 179.5007,
-          "change": -10.7578,
+          "currentPrice": 179.5548,
+          "change": -10.761,
           "changePercent": -5.65,
-          "marketValue": 359.0,
+          "marketValue": 359.11,
           "costBasis": 488.37,
-          "gainLoss": -129.37,
-          "gainLossPercent": -26.49
+          "gainLoss": -129.26,
+          "gainLossPercent": -26.47
         },
         {
           "symbol": "SURG.V",
@@ -320,20 +320,20 @@
           "displayName": "BMO CVRD CALL DJIA HDG C$",
           "shares": 50.0,
           "avgCost": 26.2228,
-          "currentPrice": 26.47,
-          "change": 0.13,
-          "changePercent": 0.49,
-          "marketValue": 1323.5,
+          "currentPrice": 26.54,
+          "change": 0.2,
+          "changePercent": 0.76,
+          "marketValue": 1327.0,
           "costBasis": 1311.14,
-          "gainLoss": 12.36,
-          "gainLossPercent": 0.94
+          "gainLoss": 15.86,
+          "gainLossPercent": 1.21
         }
       ],
       "summary": {
         "totalCost": 27372.94,
-        "totalMarketValue": 29978.55,
-        "totalGainLoss": 2605.61,
-        "totalGainLossPercent": 9.52,
+        "totalMarketValue": 29999.16,
+        "totalGainLoss": 2626.22,
+        "totalGainLossPercent": 9.59,
         "cashBalance": 10158.74
       }
     },
@@ -506,10 +506,10 @@
   ],
   "totalSummary": {
     "totalCost": 34053.11,
-    "totalMarketValue": 37196.2,
-    "totalGainLoss": 3143.09,
-    "totalGainLossPercent": 9.23,
+    "totalMarketValue": 37216.81,
+    "totalGainLoss": 3163.7,
+    "totalGainLossPercent": 9.29,
     "totalCash": 10301.1,
-    "totalValue": 47497.3
+    "totalValue": 47517.91
   }
 }
